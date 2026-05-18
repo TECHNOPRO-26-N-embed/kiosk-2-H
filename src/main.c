@@ -1,5 +1,9 @@
 #include<stdio.h>
 // ヘッダーの入力
+#include "rental.c"
+#include "return.c"
+#include "search.c"
+#include "history.c"
 
 int main(void) {
     printf("メニュー\n");
@@ -13,10 +17,10 @@ int main(void) {
     scanf("%d",&n);
 
     // 条件に応じて各処理の関数を呼び出す。
-    if (n == 1) {printf("分岐1");}
-    else if (n == 2) {printf("分岐2");}
-    else if (n == 3) {printf("分岐3");}
-    else if (n == 4) {printf("分岐4");}
+    if (n == 1) {rental();}
+    else if (n == 2) {return_book();}
+    else if (n == 3) {search();}
+    else if (n == 4) {history();}
     else {
         printf("1-4の数字を入力してください; \n");
     }

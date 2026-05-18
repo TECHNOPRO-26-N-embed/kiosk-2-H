@@ -16,7 +16,7 @@ int search_book(int book_id, books library[], int size) {
 }
 
 
-int main(void) {
+void search(void) {
     int book_id;
     printf("検索したい本のIDを入力してください: ");
     scanf("%d", &book_id);
@@ -34,5 +34,5 @@ int main(void) {
         printf("本が見つかりませんでした。\n");
     }
 
-    return 0;
+    // return 0;
 }
