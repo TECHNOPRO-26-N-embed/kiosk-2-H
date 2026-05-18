@@ -14,7 +14,7 @@ typedef struct {
     // int past_books[MAX_PAST];
 } User;
 
-void rireki(User up[], int n, int target_id) {
+void history(User up[], int n, int target_id) {
     int flag = 0;
     for (int i = 0; i < n; i++) {
         if (up[i].id == target_id) {
@@ -45,6 +45,7 @@ void rireki(User up[], int n, int target_id) {
 
 int main(void) {
     int user_id;
+    printf("ユーザーIDを入力してください: ");
     scanf("%d", &user_id);
 
     User users[] = {
@@ -56,7 +57,7 @@ int main(void) {
     // idで線形探索（構造体配列Userを探索）
     // 二部探索
     int n = 3;
-    rireki(users, n, user_id);
+    history(users, n, user_id);
 
     return 0;
 }
