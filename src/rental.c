@@ -26,6 +26,10 @@ void rental(void){
     printf("書籍IDを入力してください: ");
     //ID(整数)の入力を受け取る
     scanf("%d",&i);
+    if(i < 0 || i >= 4) {
+        printf("無効な書籍IDが入力されました。\n");
+        return;
+    }
 
     printf("書籍ID: %d\n", b_info[i].book_id);
     printf("タイトル: %s\n", b_info[i].title);
