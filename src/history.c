@@ -14,6 +14,8 @@ typedef struct {
     // int past_books[MAX_PAST];
 } User;
 
+void history();
+
 void view_history(User up[], int n, int target_id) {
     int flag = 0;
     for (int i = 0; i < n; i++) {
@@ -39,7 +41,19 @@ void view_history(User up[], int n, int target_id) {
     }
     
     if (!flag) {
+        int menu;
         printf("ユーザーが見つかりませんでした。\n");
+        printf("0: メニューに戻る\n");
+        printf("1: IDを再入力する\n");
+        scanf("%d", &menu);
+        if(menu == 0) {
+            return;
+        } else if(menu == 1) {
+            history();
+        } else {
+            printf("無効な入力です。メニューに戻ります。\n");
+            return;
+        }
     }
 }
 
