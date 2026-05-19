@@ -74,6 +74,9 @@ void search(void) {
             return;
             }else if(menu == 1) {
                 search();
+            }else {
+                printf("無効な選択です。メニューに戻ります。\n");
+                return;
             }
         }
     // return 0;
