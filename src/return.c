@@ -37,6 +37,7 @@ void return_book() {
     
     int member_id;
     int menu;
+    
 
     printf("=============返却=============\n");
     printf("会員IDを入力してください。: ");
@@ -51,13 +52,14 @@ void return_book() {
         scanf("%d", &menu);
         if(menu == 0) {
             return;
+        }else if(menu == 1) {
+            return_book();
         }
     }
 
     UserInfo *user = &users[index];
-
     while(1){
-        printf("----------貸出状況一覧----------");
+        printf("----------貸出状況一覧----------\n");
         printf("会員ID: %d\n", user->member_id);
         printf("会員名: %s\n", user->name);
         if(user->rental_count == 0) {
@@ -71,7 +73,7 @@ void return_book() {
                 return;
             }
             break;
-
+        }
         for(int i=0; i < user->rental_count; i++) {
             printf("本ID: %d\n", user->rented_books[i].book_id);
             printf("タイトル: %s\n", user->rented_books[i].title);
@@ -83,33 +85,34 @@ void return_book() {
     printf("0:1つ前に戻る\n");
     printf("9:メインメニューに戻る\n");
     scanf("%d", &menu);
-    if(menu == 1) { 
+    if(menu == 1){
         int late_fee = 0;
         for(int i=0; i < user->rental_count; i++) {
             if(user->rented_books[i].late_days > 0) {
                 late_fee += user->rented_books[i].late_days * 100; // 遅延日数に応じた料金計算
             }
         }
-        if(late_fee > 0) {
+        if(late_fee > 0){
             int payment;
-
             printf("遅延料金: %d円\n", late_fee);
             printf("支払い金額を入力してください: ");
             scanf("%d", &payment);
-            if(payment >= late_fee) {
+            if(payment >= late_fee){
                 printf("支払いが完了しました。返却処理を行います。\n");
-                // 返却処理のコードをここに追加
-            } else {
+                user->rental_count = 0; // 貸出数をリセット
+                return;
+            } else if(payment < late_fee){
                 printf("支払い金額が不足しています。\n");
-                continue;
+                return_book(); // 支払いが不足している場合は再度支払いを促す;
             }
-        } else {
+        }else{
             printf("遅延料金はありません。\n");
+            user->rental_count = 0; // 貸出数をリセット
+            return;
         }
-    } else if(menu == 0) {
+    }else if(menu == 0) {
         return_book();
-    } else if(menu == 9) {
+    }else if(menu == 9) {
         return;
     }
-}
 }
