@@ -61,7 +61,7 @@ gcc src\main.c -o app.exe -Wall
 
 コマンドプロンプトの文字コードをUTF-8に設定
 ```
-chcp65001
+chcp 65001
 ```
 
 コンパイル
