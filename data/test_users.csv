@@ -1,0 +1,3 @@
+user_id,name,now_count,book_id1,title1,author1,status1,due_date1,book_id2,title2,author2,status2,due_date2
+1001,山田太郎,2,2001,Cプログラミング入門,田中一郎,3,2026/05/18,2002,アルゴリズム図鑑,佐藤二郎,2,2026/05/25
+1002,鈴木花子,0,0,-,-,0,-,0,-,-,0,-

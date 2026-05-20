@@ -36,7 +36,7 @@
 
 ## 🔨 ビルド（コンパイル）と実行
 
-### 方法1: VSCode（推奨）
+<!-- ### 方法1: VSCode（推奨）
 
 1. `Ctrl + Shift + B` を押す → 自動的にコンパイルされます
 2. ターミナルに `app.exe` が表示されたら成功
@@ -54,6 +54,24 @@ gcc src\main.c -o app.exe -Wall
 ```
 .\build.bat
 .\app.exe
+``` -->
+
+### Command Promptでの実行（推奨）
+文字化けを防ぐために、CSV、プログラムコード、ターミナルの文字コードをUTF-8で統一するため
+
+コマンドプロンプトの文字コードをUTF-8に設定
+```
+chcp65001
+```
+
+コンパイル
+```
+gcc src/ai/main.c src/ai/ai_rental.c src/ai/ai_return.c src/ai/ai_search.c src/ai/ai_history.c -o app.exe
+```
+
+実行
+```
+app.exe
 ```
 
 ---
