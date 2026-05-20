@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ai_common.h"
 
 // data/history.csvの格納上限数
-#define MAX_HISTORY 10000
+// #define MAX_HISTORY 10000
 
-typedef struct {
-	int user_id;
-	int book_id;
-	char lend_date[20];
-	char return_date[20];
-} History;
+// typedef struct {
+// 	int user_id;
+// 	int book_id;
+// 	char lend_date[20];
+// 	char return_date[20];
+// } History;
 
 void history();
 
@@ -117,7 +118,7 @@ void history(void) {
     History histories[MAX_HISTORY];
 
     // CSVの読み込み件数
-    int history_count = load_history(histories, "./data/history.csv");
+    int history_count = load_history(histories, "./data/history1.csv");
     if (history_count < 0) {
         fprintf(stderr, "[ERROR] 履歴データの読み込みに失敗しました。\n");
         return;

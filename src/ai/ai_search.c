@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ai_common.h"
 
-#define TITLE_LEN 100
-#define AUTHOR_LEN 100
-#define MAX_BOOKS 200
-#define CSV_PATH "data/books.csv"
+// #define TITLE_LEN 100
+// #define AUTHOR_LEN 100
+// #define MAX_BOOKS 200
+// #define CSV_PATH "data/books1.csv"
 
-typedef struct {
-	int book_id;
-	char title[TITLE_LEN];
-	char author[AUTHOR_LEN];
-	int status; // 0:貸出可, 1:貸出不可, 2:貸出中, 3:延滞
-} Book;
+// typedef struct {
+// 	int book_id;
+// 	char title[TITLE_LEN];
+// 	char author[AUTHOR_LEN];
+// 	int status; // 0:貸出可, 1:貸出不可, 2:貸出中, 3:延滞
+// } Book;
 
-typedef struct {
-	Book *books;
-	int size;
-} BookList;
+// typedef struct {
+// 	Book *books;
+// 	int size;
+// } BookList;
 
 BookList load_books(void) {
 	static Book library[MAX_BOOKS];
