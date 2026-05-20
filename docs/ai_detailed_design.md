@@ -2,95 +2,162 @@
 
 ## 1. 書籍ID管理
 ### 書籍情報の読み込み（load_books）
-1. 書籍CSVファイルを開く
-2. 各行をパースし、書籍ID・概要・貸出状態を構造体リストに格納
-3. ファイルを閉じる
+```c
+Book* load_books() {
+    // 書籍CSVファイルを読み込み、書籍リストを生成
+    return NULL;
+}
+```
 
 ### 書籍情報の保存（save_books）
-1. 構造体リストの内容をCSV形式でファイルに書き出す
-2. ファイルを閉じる
+```c
+int save_books(Book* books) {
+    // 書籍リストをCSV形式で保存
+    return 0;
+}
+```
 
 ### 書籍状態表示（display_book_status）
-1. 書籍リストをループし、ID・概要・貸出状態を出力
+```c
+void display_book_status(Book* books) {
+    // 書籍リストをループし、ID・概要・貸出状態を出力
+}
+```
 
 ---
 
 ## 2. 利用者ID管理
 ### 利用者情報の読み込み（load_users）
-1. 利用者CSVファイルを開く
-2. 各行をパースし、利用者ID・氏名・連絡先等を構造体リストに格納
-3. ファイルを閉じる
+```c
+User* load_users() {
+    // 利用者CSVファイルを読み込み、利用者リストを生成
+    return NULL;
+}
+```
 
 ### 利用者追加（add_user）
-1. 新規利用者情報を入力
-2. 構造体リストに追加
-3. save_usersでCSVに保存
-
-### 利用者削除（delete_user）
-1. 削除対象IDを入力
-2. 構造体リストから該当利用者を削除
-3. save_usersでCSVに保存
+```c
+int add_user(User new_user) {
+    // 新規利用者情報を構造体リストに追加し、CSVに保存
+    return 0;
+}
+```
 
 ### 利用者情報表示（display_user_info）
-1. 利用者リストをループし、ID・氏名・連絡先等を出力
+```c
+void display_user_info(User* users) {
+    // 利用者リストをループし、ID・氏名・連絡先等を出力
+}
+```
 
 ---
 
 ## 3. 貸出処理（checkout_book）
-1. 利用者ID・書籍IDを入力
-2. 書籍リストから該当書籍を検索
-3. 貸出可否を判定（貸出可のみ進行）
-4. 書籍の状態を「貸出中」に更新
-5. 履歴に貸出記録を追加
-6. save_books, save_historyで保存
-7. 支払い処理（必要時）
+```c
+int checkout_book(int user_id, int book_id) {
+    // 書籍リストから該当書籍を検索し、貸出処理を実施
+    return 0;
+}
+```
 
 ---
 
 ## 4. 返却処理（return_book）
-1. 利用者ID・書籍IDを入力
-2. 書籍リストから該当書籍を検索
-3. 書籍の状態を「貸出可」に更新
-4. 履歴に返却記録を追加
-5. 延滞判定：返却日と貸出日を比較
-6. 延滞時は延滞料金を計算し、支払い処理
-7. save_books, save_historyで保存
+```c
+int return_book(int user_id, int book_id) {
+    // 書籍リストから該当書籍を検索し、返却処理を実施
+    return 0;
+}
+```
 
 ---
 
 ## 5. 貸出履歴保存・閲覧
-### 履歴保存（save_history）
-1. 履歴リストをCSVに書き出す
-
 ### 履歴読み込み（load_history）
-1. 履歴CSVを読み込み、構造体リストに格納
+```c
+void load_history(csv) {
+    // 履歴CSVを読み込み、履歴リストを生成
+    return NULL;
+}
+```
 
 ### 利用者ごとの履歴表示（display_user_history）
-1. 指定利用者IDの履歴のみ抽出し、一覧表示
+```c
+void display_user_history(int user_id, User* users) {
+    // 指定利用者IDの履歴を抽出し、一覧表示
+}
+```
 
 ---
 
-## 6. 延滞者管理
-### 延滞者抽出（extract_overdue_users）
-1. 履歴リストをループし、返却期限を超過した貸出を抽出
-2. 利用者IDごとにまとめてリスト化
-
-### 延滞料金計算（calculate_overdue_fee）
-1. 貸出日・返却日・返却期限を取得
-2. 期限超過日数を計算
-3. 日数×単価で延滞料金を算出
-
----
-
-## 7. 破損時対応（handle_damage）
-1. 破損書籍IDを入力
-2. 管理者へアラート表示またはログ記録
+## 6. 蔵書検索機能
+### 書籍検索（search_books）
+```c
+Book* search_books(char* keyword, Book* books) {
+    // 検索キーワードに一致する書籍を検索し、該当書籍リストを返す
+    return NULL;
+}
+```
 
 ---
 
-## 8. エラー処理・共通事項
-- ファイル存在確認、読み書き失敗時のエラー表示
-- データ不整合時の例外処理
-- すべての更新操作後は必ずCSV保存
+## 7. 関数呼び出し関係（フローチャートイメージ）
 
----
+### 7.1 関数名（呼び出す関数名）
+- load_books（なし）
+- save_books（なし）
+- display_book_status（なし）
+- load_users（なし）
+- add_user（save_users）
+- display_user_info（なし）
+- checkout_book（load_books, load_users, load_history, save_books）
+- return_book（load_books, load_history, save_books）
+- load_history（なし）
+- display_user_history（load_history）
+- search_books（load_books）
+
+### 7.2 主要処理フロー
+- 貸出処理: checkout_book -> load_books -> load_users -> load_history -> save_books
+- 返却処理: return_book -> load_books -> load_history -> save_books
+- 履歴表示: display_user_history -> load_history
+- 蔵書検索: search_books -> load_books
+
+## 構造体定義例
+
+```c
+// 書籍情報
+typedef struct {
+	int book_id;
+	char title[100];
+	char author[100];
+	int status; // 0:貸出可, 1:貸出不可, 2:貸出中, 3:延滞
+} Book;
+
+// 利用者情報
+typedef struct {
+	int user_id;
+	char name[100];
+	char phone[32];
+	char mail[100];
+	char address[200];
+	int now_count;
+	int past_count;
+} User;
+
+// 履歴情報
+typedef struct {
+	int user_id;
+	int book_id;
+	char lend_date[20];
+	char return_date[20];
+} History;
+
+// 操作ログ
+// typedef struct {
+// 	char datetime[20];
+// 	int user_id;
+// 	char operation[32];
+// 	char detail[128];
+// } OperationLog;
+貸出処理をキャンセルした場合は、追加せず、貸出操作を確定した人のみの処理を追加する（操作番号を追加する　例1　1番が押されました。など）
+```

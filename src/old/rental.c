@@ -25,6 +25,7 @@ void rental(void){
     // b_info[i].book_id = i;
     printf("書籍IDを入力してください: ");
     //ID(整数)の入力を受け取る
+    // ifで括る　正しい型かどうか scanfの戻り値1が異常
     scanf("%d",&i);
     if(i < 0 || i >= 4) {
         printf("無効な書籍IDが入力されました。\n");
