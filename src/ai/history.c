@@ -18,6 +18,7 @@ int load_history(History histories[], const char* filename) {
     // ファイル読み込みと例外処理
     FILE* fp = fopen(filename, "r");
     if (!fp) {
+        // stderrは標準入力エラー出力
         fprintf(stderr, "[ERROR] 履歴ファイルが開けません: %s\n", filename);
         return -1;
     }
@@ -26,10 +27,12 @@ int load_history(History histories[], const char* filename) {
     char line[256];
     while (fgets(line, sizeof(line), fp) != NULL && count < MAX_HISTORY) {
         // fgetsで読み込んだ行の末尾に改行が残っていれば除去
+        // strlenの戻り値は、size_t
         size_t len = strlen(line);
         if (len > 0 && line[len-1] == '\n') {
             line[len-1] = '\0';
         }
+        
         char* token;
         // 1列目: user_id
         token = strtok(line, ",");
@@ -37,7 +40,10 @@ int load_history(History histories[], const char* filename) {
             fprintf(stderr, "[WARN] CSV形式不正: user_id列がありません\n");
             continue;
         }
+        // atoiは文字列を整数に変換する関数　文字、空文字は0を返す('0'も0となる)
+        // ここの例外処理が甘そう
         histories[count].user_id = atoi(token);
+        
         // 2列目: book_id
         token = strtok(NULL, ",");
         if (!token) {
@@ -45,14 +51,17 @@ int load_history(History histories[], const char* filename) {
             continue;
         }
         histories[count].book_id = atoi(token);
+        
         // 3列目: lend_date
         token = strtok(NULL, ",");
         if (!token) {
             fprintf(stderr, "[WARN] CSV形式不正: lend_date列がありません\n");
             continue;
         }
+        // 文字列に終端文字列を追加
         strncpy(histories[count].lend_date, token, sizeof(histories[count].lend_date)-1);
         histories[count].lend_date[sizeof(histories[count].lend_date)-1] = '\0';
+        
         // 4列目: return_date
         token = strtok(NULL, ",\n");
         if (!token) {
@@ -61,6 +70,7 @@ int load_history(History histories[], const char* filename) {
         }
         strncpy(histories[count].return_date, token, sizeof(histories[count].return_date)-1);
         histories[count].return_date[sizeof(histories[count].return_date)-1] = '\0';
+        
         count++;
     }
     fclose(fp);
